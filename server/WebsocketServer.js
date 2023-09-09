@@ -96,7 +96,7 @@ class ClientConnection {
   }
 
   startProcess () {
-    let cmd, cmdArgs;
+    let cmd, cmdArgs,cwd=".";
     if (this.useDockerContainer) {
       cmd = "docker";
       // Note for MacOS: use "--platform=linux/amd64"
@@ -107,8 +107,9 @@ class ClientConnection {
       console.warn("Running without Docker container!")
       cmd = "lean";
       cmdArgs = ["--server"];
+      cwd = "./LeanProject"
     }
-    const cwd = '.'
+    // const cwd = '.'
 
     this.lean = spawn(cmd, cmdArgs, { cwd })
   }
